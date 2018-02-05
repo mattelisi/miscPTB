@@ -10,21 +10,19 @@ function t_sacc = waitForSaccade(scr,const,visual, t0, maxRT)
 % parameters
 alpha = 0.7; % 0 < alpha < 1; adjust 
 vthrs = 30 * visual.ppd; % velocity threshold, converted in pixels
-sp = 1/1000; % sampling period
 
 % get first sample
-[x_,y_] = getCoord(scr, const);
-[x,y] = getCoord(scr, const);
-v = sqrt((x-x_)^2+(y-y_)^2) / sp;
-[x_,y_] = deal(x,y);
+[x_,y_, t_] = getCoordT(scr, const);
+[x,y, t] = getCoordT(scr, const);
+v = sqrt((x-x_)^2+(y-y_)^2) / (t - t_);
+[x_,y_, t_] = deal(x,y, t);
 
 % loop until speed exceed vthrs | elapsed time > maxRT
 while v<vthrs && (GetSecs-t0)<maxRT
     if Eyelink('NewFloatSampleAvailable') || const.TEST
-        [x,y] = getCoord(scr, const);
-        v = alpha*(sqrt((x-x_)^2+(y-y_)^2)/sp) + (1-alpha)*v;
-        [x_,y_] = deal(x,y);
+        [x,y, t] = getCoordT(scr, const);
+        v = alpha*(sqrt((x-x_)^2+(y-y_)^2)/(t - t_)) + (1-alpha)*v;
+        [x_,y_, t_] = deal(x,y, t);
     end
 end
-t_sacc = GetSecs - 0.01; % subtract 
-
+t_sacc = GetSecs;
