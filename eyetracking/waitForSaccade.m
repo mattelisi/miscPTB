@@ -38,6 +38,7 @@ function [x,y,t] =getCoordT(wPtr,const)
 
 if const.TEST
     [x,y]=GetMouse(wPtr.main); % gaze position simulate by mouse position
+    t = GetSecs;
 else
     evt = Eyelink('newestfloatsample');
     t = GetSecs;
