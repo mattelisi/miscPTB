@@ -19,7 +19,7 @@ if length(highlight)==1
 end
 
 difference = highlight - background;
-[x y] = meshgrid(widthArray, widthArray);
+[x, y] = meshgrid(widthArray, widthArray);
 imageMatrix = exp(-((x .^ 2) + (y .^ 2)) / (sigma ^ 2));
 if length(difference)==1
     grayscaleImageMatrix = background + difference * imageMatrix;
