@@ -7,4 +7,4 @@ They generally assume that `scr` is a matlab structure containing information ab
 [scr.main,scr.rect] = Screen('OpenWindow',max (Screen('Screens')), [0.5 0.5 0.5],[],32,2,0,0);
 ```
 Some functions refer to `visual.ppd` which is intended to be the _pixels-per-degree_ (of visual angle) conversion factor.
-The eye tracking functions also refer to a logical flag `const.TEST`, which is set to 1 when the eyewink is launched in dummy mode.
+The eye tracking functions also refer to a logical flag `const.TEST`, which is set to 1 when the Eyelink is launched in dummy mode.
